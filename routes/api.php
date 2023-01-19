@@ -10,9 +10,10 @@ Route::group(['middleware' => ['guest:sanctum']], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 });
-Route::get('/posts', [PostController::class, 'index']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
+    Route::get('/posts', [PostController::class, 'index']);
     Route::post('/posts', [PostController::class, 'store']);
     Route::put('/posts/{post}/update', [PostController::class, 'update']);
     Route::get('/posts/{post}', [PostController::class, 'show']);
